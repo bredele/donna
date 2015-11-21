@@ -53,7 +53,7 @@ module.exports = function() {
   that.guess = function(sentence) {
   	var category = language.guess(sentence);
   	var cb = categories[category];
-  	if(cb) cb(sentence);
+  	if(typeof cb === 'function') cb(sentence);
   	return category;
   };
 

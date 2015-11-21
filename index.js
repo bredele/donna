@@ -64,7 +64,7 @@ module.exports = function() {
    */
 
   that.learn = function(category, plugin) {
-  	categories[category] = plugin;
+  	plugin.call(that);
   	return that;
   };
 

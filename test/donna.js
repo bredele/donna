@@ -20,3 +20,20 @@ describe('deep learning', function() {
 
 	});
 });
+
+
+describe('plugin', function() {
+	var bot, plugin;
+	beforeEach(function() {
+		bot = donna();
+		plugin = function() {
+			this.train('it is cold', 'weather');
+			this.train('the sun is high but there is no cloud', 'weather');
+		};
+	});
+
+	it('should add donna trainings', function() {
+		bot.learn('weather', plugin);
+		assert.equal(bot.guess('there is no sun'), 'weather');
+	});
+});

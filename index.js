@@ -23,6 +23,13 @@ module.exports = function() {
 
 
   /**
+   * Plugins/category mapping.
+   */
+
+  var categories = {};
+
+
+  /**
    * Classify sentence.
    *
    * @param {String} sentence
@@ -45,6 +52,20 @@ module.exports = function() {
 
   that.guess = function(sentence) {
   	return language.guess(sentence);
+  };
+
+
+  /**
+   * Add learning plugin.
+   *
+   * @param {String} category
+   * @param {Function} plugin
+   * @api public
+   */
+
+  that.learn = function(category, plugin) {
+  	categories[category] = plugin;
+  	return that;
   };
 
   return that;

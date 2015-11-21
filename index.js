@@ -51,7 +51,10 @@ module.exports = function() {
    */
 
   that.guess = function(sentence) {
-  	return language.guess(sentence);
+  	var category = language.guess(sentence);
+  	var cb = categories[category];
+  	if(cb) cb(sentence);
+  	return category;
   };
 
 
@@ -64,9 +67,11 @@ module.exports = function() {
    */
 
   that.learn = function(category, plugin) {
-  	plugin.call(that);
+  	categories[category] = plugin.call(that);
   	return that;
   };
+
+
 
   return that;
 

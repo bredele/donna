@@ -23,17 +23,33 @@ describe('deep learning', function() {
 
 
 describe('plugin', function() {
-	var bot, plugin;
+	var bot;
 	beforeEach(function() {
 		bot = donna();
-		plugin = function() {
-			this.train('it is cold', 'weather');
-			this.train('the sun is high but there is no cloud', 'weather');
-		};
 	});
 
 	it('should add donna trainings', function() {
+		// this plugin add some trainings
+		var plugin = function() {
+			this.train('it is cold', 'weather');
+			this.train('the sun is high but there is no cloud', 'weather');
+		};
+
 		bot.learn('weather', plugin);
 		assert.equal(bot.guess('there is no sun'), 'weather');
 	});
+
+	it('should pass categorized sentence to the appropriate plugin', function(done) {
+		var plugin = function() {
+			return function(sentence) {
+				console.log(sentence);
+				if(sentence === 'there is no sun') done();
+			};
+		};
+
+		bot.learn('weather', plugin);
+		bot.train('hello', 'weather'); // one training is mandatory 
+		bot.guess('there is no sun');
+	})
+
 });

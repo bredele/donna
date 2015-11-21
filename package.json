@@ -19,5 +19,8 @@
   "dependencies": {
     "classifier": "git://github.com/bredele/classifier",
     "tokenizer": "git://github.com/bredele/tokenizer"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4"
   }
 }
